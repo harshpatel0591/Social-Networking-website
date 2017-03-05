@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="Template.xhtml">
+
+
+            <ui:define name="content">
+
+                <h:form>
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <table class="table table-striped">
+
+                                <h:form class="form form-control">
+
+                                    <tr>
+                                        <td colspan="3" align="center">
+
+
+                                            <img src="male.jpg" alt="" width="200" height="200"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td align="center">
+                                            <Strong> Chirp Handle</Strong> : <h:outputText value="#{friendProfile.userName}" id="userName"  />
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td align="center">
+                                            <Strong> Followers</Strong> : <h:outputText value="#{friendProfile.followers}" id="followers"  />
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td align="center">
+                                            <Strong> Following</Strong> : <h:outputText value="#{friendProfile.following}" id="following"  />
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3" align="center">
+                                            <h:commandButton value="#{friendProfile.buttonValue}" action="#{friendProfile.Follow}" class="btn btn-primary">
+                                                <f:param name="friendId" value="#{friendProfile.friendId}"/>
+                                            </h:commandButton>
+                                            <h:commandButton value="Message" action="#{friendProfile.ViewMessage}" class="btn btn-primary">
+                                                <f:param name="friendId" value="#{friendProfile.friendId}"/>
+                                            </h:commandButton>
+
+
+                                        </td>
+
+                                    </tr>
+
+                                </h:form>
+
+                            </table> 
+
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+
+                        </div>
+
+                    </div>
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+

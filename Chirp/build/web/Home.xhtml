@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <h:body>
+
+        <ui:composition template="Template.xhtml">
+
+
+            <ui:define name="content">
+                <div class="row">
+
+                    <div class="col-md-3">
+
+                        <table class="table table-striped">
+                            <h:form>
+                                <tr>
+                                    <td colapsn="3" align="center">
+                                        <h:graphicImage url="#{home.profilePic}" width="200px" height="200px"></h:graphicImage>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td colapsn="3" align="center">
+                                        <h:commandButton class="btn btn-primary" value="Upload Image" action="UploadFileTest.xhtml"></h:commandButton>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colapsn="3" align="center">
+                                        Welcome #{home.firstName} #{home.lastName} 
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Followers: <h:commandLink value="#{home.followers}" action="Followers.xhtml"></h:commandLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Following: <h:commandLink value="#{home.following}" action="Following.xhtml"></h:commandLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Chirps: #{home.tweetCounts}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colapsn="3" align="center">
+                                        <h:commandLink value="View Chirps" action="UserProfile"></h:commandLink>
+                                    </td>
+                                </tr>
+                            </h:form>
+                        </table>
+
+                        <table class="table table-striped">
+                            <tr>
+                                <td>
+                                    <Strong>Hash Tag</Strong>
+                                </td>
+                                <td>
+                                    <Strong>Trending Count</Strong>
+                                </td>
+                            </tr>
+
+                            <c:forEach var="entry" items="${home.trendingHashTags}"> 
+                                <tr>
+                                    <td>${entry.key}</td> 
+                                    <td>${entry.value}</td>
+                                </tr> 
+                            </c:forEach>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <table class="table table-striped">
+
+                            <h:form class="form form-control">
+
+                                <tr>
+
+                                    <td colspan="2" >
+
+                                        <h:inputText class="form-control" id="txtSearch" value="#{home.searchQuery}" style="width: 400px;" >
+                                            <f:ajax execute="txtSearch" event="keyup" render="divSearchResult" listener="#{home.SearchChirpQuery()}" ></f:ajax> 
+                                        </h:inputText>
+
+                                    </td>
+
+                                    <td>
+                                        <h:commandButton class="btn btn-primary" value="Search" action="#{home.RedirectToSearchResult()}"></h:commandButton>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <h:panelGroup id="divSearchResult">
+                                            <c:forEach var="o" items="#{home.searchResult}" >
+                                                <div>
+                                                    <h:outputLabel onclick="AutoCompleteText(this)" value="#{o.searchResultText}"></h:outputLabel>
+
+                                                </div>
+                                            </c:forEach>
+                                        </h:panelGroup>
+                                    </td>
+                                </tr>
+                                
+                            </h:form>
+                        </table>
+
+                        <table>
+                            <h:form>
+                                <tr>
+                                        
+                                    
+                                    <td colspan="3" align="center">
+                                        <h:inputTextarea class="form-control" value="#{home.tweetText}" id="txtTweet" style="width: 400px;height: 100px;border:1px solid #e2e2e2;" >
+                                            <f:ajax execute="txtTweet" event="keyup" render="lblHashTags" listener="#{home.CheckHashTags()}"></f:ajax>
+                                            </h:inputTextarea>
+                                    </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                    <td colspan="3" align="center">
+                                        <h:commandButton class="btn btn-primary" value="Chirp" action="#{home.SubmitTweet()}" style="border-radius: 3px;padding: 3px;">
+                                        </h:commandButton>
+                                    </td>
+                                    </tr>
+                                        
+                                    <tr>
+                                        <td colspan="3" align="center">
+                                            <span style="margin-left: 5px;">
+                                            <h:outputLabel value="#{home.message}" style="color: red;"></h:outputLabel>
+                                        </span>
+                                        </td>                                        
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <div>
+                                            <h:outputLabel id="lblHashTags" value="#{home.displayHashTags}"></h:outputLabel>
+                                        </div>
+                                        </td>
+                                        
+                                    </tr>
+                            </h:form>
+
+                        </table> 
+
+
+                        <table>
+
+                            <h:form>
+
+                                <tr>
+                                    <td>
+                                        <ui:repeat var="o" value="#{home.feeds}">
+                                            <div class="row" style="padding: 10px;">
+
+                                                <div class="panel-group">
+                                                    <div class="panel panel-primary">
+                                                        <div class="panel-heading">
+                                                            <span style="font-size: 20px">
+                                                                #{o.userFirstName} #{o.userLastName}
+                                                                <span style="font-size: 16px;">
+                                                                    @#{o.userName}
+                                                                </span>
+                                                            </span>
+                                                            <span style="font-size: 12px;">#{o.message}</span>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            #{o.tweetText}
+                                                            <span style="float:right">
+                                                                <h:commandButton class="btn btn-primary" value="ReChirp" action="#{home.ReChirp(o.tweetText, o.userId)}"></h:commandButton>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </ui:repeat>
+                                    </td>
+
+                                </tr>
+
+                            </h:form>
+
+                        </table>
+
+
+
+                    </div>
+
+
+                    <div class="col-md-3">
+
+
+                    </div>
+
+                </div>
+
+                <script type="text/javascript">
+                    $(document).ready(function (){
+                        window.alert = function() {};
+                    });
+                    
+                    function AutoCompleteText(spn)
+                    {
+                        $("#j_idt37\\:txtSearch").val(spn.innerText);
+                    }
+
+                </script>
+
+            </ui:define>
+
+
+
+        </ui:composition>
+
+
+
+
+
+    </h:body>
+
+</html>

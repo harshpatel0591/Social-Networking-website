@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>View Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="Template.xhtml">
+
+            <ui:define name="content">
+
+                <div>
+                    <h:outputText value="#{viewProfile.errorMessage}" style="color:red"></h:outputText>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-3">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <h2 class="text-primary" align="center">Profile Information </h2>
+                        <table class="table table-striped">
+                            <h:form class="form form-control">
+
+
+
+                                <tr>
+                                    <td>
+                                        <Strong> Chirp Handle</Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:outputText value="@#{viewProfile.searchText}" id="userName" class="form form-control" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Status
+                                    </td>
+                                    <td>
+                                        <h:commandButton id="btnFollow" value="#{viewProfile.buttonText}">
+                                            <f:ajax event="click" execute="btnFollow" render="btnFollow" listener="#{viewProfile.FollowUnfollow()}"></f:ajax>
+                                        </h:commandButton>
+                                    </td>
+                                </tr>
+
+
+                            </h:form>
+                        </table>
+
+
+                        <div>
+                            <h2 class="text-primary" align="center">Chirps</h2>
+
+                            <div>
+                                <div class="">
+                                    <ui:repeat var="o" value="#{viewProfile.chirps}">
+                                        <div class="row" style="padding: 10px;">
+
+                                            <div class="panel-group">
+                                                <div class="panel panel-primary">
+                                                    <div class="panel-heading">
+                                                        <span style="font-size: 20px">
+                                                            #{o.userFirstName} #{o.userLastName}
+                                                            <span style="font-size: 16px;">
+                                                                @#{viewProfile.searchText}
+                                                            </span>
+                                                        </span>
+                                                        <span style="font-size: 12px;">#{o.message}</span>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        #{o.tweetText}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>

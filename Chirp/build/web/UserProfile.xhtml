@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:body>
+
+        <ui:composition template="Template.xhtml">
+
+
+            <ui:define name="content">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <h2 class="text-primary" align="center">User Profile</h2>
+                        <table class="table table-striped">
+                            <h:form class="form form-control">
+
+                                <tr>
+                                    <td>
+                                        <Strong>First Name</Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{userProfile.firstName}" id="firstName"  class="form form-control"/>
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <Strong>Last Name</Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{userProfile.lastName}" id="lastName" class="form form-control" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <Strong>Email</Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{userProfile.email}" id="email" class="form form-control" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <Strong> Chirp Handle</Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:outputText value="#{userProfile.userName}" id="userName" class="form form-control" />
+                                    </td>
+                                </tr>
+
+
+                            </h:form>
+                        </table>
+
+
+                        <div>
+                            <h2 class="text-primary" align="center">Your Chirps</h2>
+
+                            <div>
+                                
+
+                                <ui:repeat var="o" value="#{userProfile.myChirps}">
+                                    <div style="padding: 10px;">
+
+                                        <div class="panel-group">
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <span style="font-size: 20px">
+                                                        #{userProfile.firstName} #{userProfile.lastName}
+                                                        <span style="font-size: 16px;">
+                                                            @#{userProfile.userName}
+                                                        </span>
+                                                    </span>
+                                                    <span style="font-size: 12px;">#{o.message}</span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    #{o.tweetText}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ui:repeat>
+                            </div>
+
+
+
+                        </div>
+
+                        
+
+                        <div>
+                            <br/>
+                        <h3 class="text-primary" align="center">Change Password</h3>
+                            <h:outputLabel value="#{userProfile.message}" style="color:red"></h:outputLabel>
+                        </div>
+                        <table class="table table-striped">
+                            <h:form class="form form-control">
+
+                                <tr>
+                                    <td>
+                                        <Strong> Current Password </Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:inputSecret value="#{userProfile.password}" id="currentPassword" class="form form-control" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <Strong> New Password </Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:inputSecret value="#{userProfile.newPassword}" id="newPassword" class="form form-control" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <Strong>  Confirm Password </Strong>
+                                    </td>
+                                    <td align="center">
+                                        :
+                                    </td>
+                                    <td>
+                                        <h:inputSecret value="#{userProfile.confirmNewPassword}" id="confirmPassword" class="form form-control" />
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" align="center">
+                                        <h:commandButton value="ChangePassword" action="#{userProfile.ChangePassword}" class="btn btn-primary"/>
+
+                                    </td>
+
+                                </tr>
+
+                            </h:form>
+                        </table>   
+                    </div>
+
+                    <div class="col-sm-3">
+                    </div>
+
+                </div>
+
+
+            </ui:define>
+
+
+        </ui:composition>
+
+
+    </h:body>
+</html>
+
