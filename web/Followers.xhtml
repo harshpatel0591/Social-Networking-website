@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Followers</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="Template.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <style>
+                        .pad10{padding:10px;}
+                    </style>
+                    <div>Follower Details</div>
+                    
+                    <div style="text-align: center;">
+                        
+                    
+                        <h:dataTable class="table table-striped" value="#{followers.details}" var="o" border="1">
+
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Name</f:facet>
+    				<!-- row record -->
+                                #{o.firstName} #{o.lastName}
+    				
+    			</h:column>
+                        
+                        <h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Chirp Handle</f:facet>
+    				<!-- row record -->
+                                @#{o.userName}
+    				
+    			</h:column>
+                        
+                        <h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Common Followers</f:facet>
+    				<!-- row record -->
+    				#{o.commonFriendCount}
+    			</h:column>
+                        
+                        <h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Chirps</f:facet>
+    				<!-- row record -->
+                                #{o.chirpCount}
+    				
+    			</h:column>
+                        </h:dataTable>
+                    
+                    </div>
+                    
+                    
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
